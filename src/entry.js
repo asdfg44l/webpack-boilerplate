@@ -1,7 +1,5 @@
 const { test } = require('./test')
-
-//import image
-import glitter from './assets/images/gold-glitter.png'
+require('./index')
 
 //import scss
 import './assets/scss/all.scss'

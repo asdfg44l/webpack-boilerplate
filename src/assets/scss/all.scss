@@ -3,4 +3,13 @@
         color: white;
         background-color: red;
     }
+    &money {
+        width: 300px;
+        height: 500px;
+        background-image: url('../images/gold-glitter.png');
+        background-repeat: no-repeat;
+    }
+}
+.d-flex {
+    display: flex;
 }

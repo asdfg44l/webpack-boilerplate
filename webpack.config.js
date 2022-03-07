@@ -1,21 +1,51 @@
 const path = require('path')
+
+//plugins
+const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const HandlebarsWebpackPlugin = require('handlebars-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-    mode: 'development',
+    mode: '',
     entry: ['./src/entry'],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'javascript/bundle.js',
+        clean: true
     },
     plugins: [
+        //html
+        // new HtmlWebpackPlugin({
+        //     title: 'Webpack Boilerplate',
+        //     template: path.join(__dirname, "src", "pages", "index.html"),
+        //     filename: "index.html"
+        // }),
+        //handlebars
         new HtmlWebpackPlugin({
-            title: 'webpack Boilerplate',
-            template: path.resolve(__dirname, './src/index.html'),
-            filename: 'index.html'
+            title: 'Webpack Boilerplate',
+            template: path.join(__dirname, "src", "pages", "index.hbs"),
+            filename: path.join(__dirname, "dist", "pages", "index.html")
         }),
-        new CleanWebpackPlugin()
+        // new HandlebarsWebpackPlugin({
+        //     htmlWebpackPlugin: {
+        //         enabled: true,
+        //         prefix: "html",
+        //         HtmlWebpackPlugin
+        //     },
+
+        //     entry: path.join(process.cwd(), "src", "pages", "*.hbs"),
+        //     output: path.join(process.cwd(), "dist", "[name].html"),
+
+        //     partials: [
+        //         path.join(process.cwd(), "html",/* <-- this should match htmlWebpackPlugin.prefix */ "*", "*.hbs"),
+        //         path.join(process.cwd(), "src", "hbs", "*", "*.hbs")
+        //     ]
+        // }),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css"
+        }),
+        new HotModuleReplacementPlugin()
     ],
     module: {
         rules: [
@@ -27,10 +57,17 @@ module.exports = {
             },
             // Images
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-                type: 'asset/resource',
+                test: /\.(?:ico|gif|png|jpe?g)$/i,
+                type: 'asset',
+                //解析
+                parser: {
+                    //to base64
+                    dataUrlCondition: {
+                        maxSize: 4 * 1024
+                    }
+                },
                 generator: {
-                    filename: 'assets/[name][ext]'
+                    filename: 'assets/images/[name][ext]'
                 }
             },
             // Fonts and SVGs
@@ -40,8 +77,28 @@ module.exports = {
             },
             {
                 test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-            }
+                use: [
+                    // 'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ]
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader',
+            },
+            // {
+            //     test: /\.(hbs|handlebars)$/i,
+            //     use: ["html-loader", "handlebars-loader"]
+            // }
         ]
+    },
+    devServer: {
+        static: path.resolve(__dirname, './dist'),
+        compress: true,
+        hot: true,
+        port: 8989
     }
 }
