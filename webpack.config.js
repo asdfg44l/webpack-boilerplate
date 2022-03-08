@@ -1,7 +1,7 @@
 const path = require('path')
 
 //plugins
-const { HotModuleReplacementPlugin } = require('webpack')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HandlebarsWebpackPlugin = require('handlebars-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -14,6 +14,12 @@ module.exports = {
         filename: 'javascript/bundle.js',
         clean: true
     },
+    resolve: {
+        //resolve webpack + require handlebars error
+        alias: {
+            handlebars: 'handlebars/dist/handlebars.min.js'
+        }
+    },
     plugins: [
         //html
         // new HtmlWebpackPlugin({
@@ -25,7 +31,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Webpack Boilerplate',
             template: path.join(__dirname, "src", "pages", "index.hbs"),
-            filename: path.join(__dirname, "dist", "pages", "index.html")
+            filename: path.join(__dirname, "dist", "pages", "index.html"),
+            inject: true
         }),
         // new HandlebarsWebpackPlugin({
         //     htmlWebpackPlugin: {
@@ -45,7 +52,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         }),
-        new HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin()
     ],
     module: {
         rules: [
@@ -86,19 +93,18 @@ module.exports = {
                 ]
             },
             {
-                test: /\.html$/,
-                loader: 'html-loader',
-            },
-            // {
-            //     test: /\.(hbs|handlebars)$/i,
-            //     use: ["html-loader", "handlebars-loader"]
-            // }
+                test: /\.(hbs|handlebars)$/i,
+                use: ["handlebars-loader"]
+            }
         ]
     },
     devServer: {
-        static: path.resolve(__dirname, './dist'),
+        static: {
+            directory: path.resolve(__dirname, 'dist/pages'),
+            watch: true
+        },
         compress: true,
-        hot: true,
+        hot: false,
         port: 8989
     }
 }

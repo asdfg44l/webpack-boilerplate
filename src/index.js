@@ -1,8 +1,13 @@
-const Handlebars = require('handlebars')
+// const Handlebars = require('handlebars')
 
-const root = document.getElementById('root')
-const template = Handlebars.compile(root)
+// let root = document.getElementById('root').innerHTML
+// const template = Handlebars.compile(root)
 
-template({
-    testStr: 'this is a test string'
-})
+// html = template({
+//     testStr: 'this is a hello message'
+// })
+
+// console.log('root: ', root)
+// console.log('html: ', html)
+
+// root = html
