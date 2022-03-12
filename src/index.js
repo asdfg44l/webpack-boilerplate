@@ -1,13 +1,15 @@
-// const Handlebars = require('handlebars')
+const Handlebars = require('handlebars')
 
-// let root = document.getElementById('root').innerHTML
-// const template = Handlebars.compile(root)
+//data
+import testJSON from './assets/data/test.json'
 
-// html = template({
-//     testStr: 'this is a hello message'
-// })
+//template
+const { default: testTemplate } = require('./templates/test.html')
 
-// console.log('root: ', root)
-// console.log('html: ', html)
+//load
+const renderTemplate = (data, template, anchor) => {
+    const content = Handlebars.compile(template.toString())(data)
+    $(anchor).append(content)
+}
 
-// root = html
+renderTemplate(testJSON, testTemplate, "#root")

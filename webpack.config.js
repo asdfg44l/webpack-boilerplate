@@ -14,6 +14,10 @@ module.exports = {
         filename: 'javascript/bundle.js',
         clean: true
     },
+    watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000
+    },
     resolve: {
         //resolve webpack + require handlebars error
         alias: {
@@ -31,24 +35,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Webpack Boilerplate',
             template: path.join(__dirname, "src", "pages", "index.hbs"),
-            filename: path.join(__dirname, "dist", "pages", "index.html"),
+            filename: path.join(__dirname, "dist", "index.html"),
             inject: true
         }),
-        // new HandlebarsWebpackPlugin({
-        //     htmlWebpackPlugin: {
-        //         enabled: true,
-        //         prefix: "html",
-        //         HtmlWebpackPlugin
-        //     },
 
-        //     entry: path.join(process.cwd(), "src", "pages", "*.hbs"),
-        //     output: path.join(process.cwd(), "dist", "[name].html"),
-
-        //     partials: [
-        //         path.join(process.cwd(), "html",/* <-- this should match htmlWebpackPlugin.prefix */ "*", "*.hbs"),
-        //         path.join(process.cwd(), "src", "hbs", "*", "*.hbs")
-        //     ]
-        // }),
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         }),
@@ -56,13 +46,23 @@ module.exports = {
     ],
     module: {
         rules: [
+            //HTML
+            {
+                test: /\.html$/,
+                use: ['html-loader']
+            },
+            //Handlebars
+            {
+                test: /\.(hbs|handlebars)$/i,
+                use: ["handlebars-loader"]
+            },
             //JavaScript ES6
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']
             },
-            // Images
+            //Images
             {
                 test: /\.(?:ico|gif|png|jpe?g)$/i,
                 type: 'asset',
@@ -77,11 +77,12 @@ module.exports = {
                     filename: 'assets/images/[name][ext]'
                 }
             },
-            // Fonts and SVGs
+            //Fonts and SVGs
             {
                 test: /\.(woff(2)?|eot|ttf|otf|svg|$)/,
                 type: 'asset/inline'
             },
+            //SCSS
             {
                 test: /\.(scss|css)$/,
                 use: [
@@ -91,10 +92,6 @@ module.exports = {
                     'postcss-loader',
                     'sass-loader'
                 ]
-            },
-            {
-                test: /\.(hbs|handlebars)$/i,
-                use: ["handlebars-loader"]
             }
         ]
     },
@@ -104,6 +101,7 @@ module.exports = {
             watch: true
         },
         compress: true,
+        open: true,
         hot: false,
         port: 8989
     }

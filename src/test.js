@@ -1,9 +1,5 @@
-function test() {
-    console.log('test')
-}
+// const Handlebars = require('handlebars')
 
-module.exports = {
-    test
-}
-
-
+// Handlebars.registerHelper('toJSON', function(obj) {
+//     return JSON.stringify(obj);
+// });
