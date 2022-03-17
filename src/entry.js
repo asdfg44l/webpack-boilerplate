@@ -3,8 +3,9 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 //require javascript
-require('./test')
-require('./index')
+require('./javascript/test.js')
+require('./javascript/index.js')
+
 
 //import scss
 import './assets/scss/all.scss'

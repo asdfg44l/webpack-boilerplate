@@ -3,15 +3,25 @@ const path = require('path')
 //plugins
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HandlebarsWebpackPlugin = require('handlebars-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: '',
     entry: ['./src/entry'],
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 test: /[\\/]node_modules[\\/]/i,
+    //                 name: 'vendors',
+    //                 chunks: 'all',
+    //             }
+    //         }
+    //     },
+    // },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'javascript/bundle.js',
+        filename: 'javascript/[name].js',
         clean: true
     },
     watchOptions: {
@@ -25,12 +35,6 @@ module.exports = {
         }
     },
     plugins: [
-        //html
-        // new HtmlWebpackPlugin({
-        //     title: 'Webpack Boilerplate',
-        //     template: path.join(__dirname, "src", "pages", "index.html"),
-        //     filename: "index.html"
-        // }),
         //handlebars
         new HtmlWebpackPlugin({
             title: 'Webpack Boilerplate',
@@ -54,7 +58,15 @@ module.exports = {
             //Handlebars
             {
                 test: /\.(hbs|handlebars)$/i,
-                use: ["handlebars-loader"]
+                use: [
+                    {
+                        loader: "handlebars-loader",
+                        options: {
+                            helperDirs: path.join(__dirname, 'src', 'helpers'),
+                            partialDirs: path.join(__dirname, 'src', 'partials')
+                        }
+                    }
+                ],
             },
             //JavaScript ES6
             {
@@ -101,7 +113,7 @@ module.exports = {
             watch: true
         },
         compress: true,
-        open: true,
+        // open: true,
         hot: false,
         port: 8989
     }
