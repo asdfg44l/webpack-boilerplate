@@ -1,24 +1,6 @@
 @import './reset';
+@import './variable';
+@import './base';
+@import './common';
+@import './theme';
 @import './utilities';
-
-.w-100 {
-    width: 100%;
-}
-.vh-min-100 {
-    min-height: 100vh;
-}
-.bg- {
-    &money {
-        background-image: url('../images/gold-glitter.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    &google {
-        background-image: url('../images/Google_Logo.svg');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-}
-.d-flex {
-    display: flex !important;
-}

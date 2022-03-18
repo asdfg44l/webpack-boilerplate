@@ -1,0 +1,13 @@
+
+.bg- {
+    &money {
+        background-image: url('../images/gold-glitter.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &google {
+        background-image: url('../images/Google_Logo.svg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
