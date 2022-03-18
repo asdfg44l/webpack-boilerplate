@@ -1,52 +1,38 @@
 const path = require('path')
 
 //plugins
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-    mode: '',
-    entry: ['./src/entry'],
-    // optimization: {
-    //     splitChunks: {
-    //         cacheGroups: {
-    //             commons: {
-    //                 test: /[\\/]node_modules[\\/]/i,
-    //                 name: 'vendors',
-    //                 chunks: 'all',
-    //             }
-    //         }
-    //     },
-    // },
+    entry: [
+        path.join(process.cwd(), 'src/entry.js')
+    ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(process.cwd(), 'dist'),
         filename: 'javascript/[name].js',
         clean: true
     },
-    watchOptions: {
-        aggregateTimeout: 200,
-        poll: 1000
-    },
     resolve: {
-        //resolve webpack + require handlebars error
         alias: {
-            handlebars: 'handlebars/dist/handlebars.min.js'
+            //resolve webpack + require handlebars error
+            handlebars: 'handlebars/dist/handlebars.min.js',
+            '@': path.resolve(process.cwd(), 'src')
         }
     },
     plugins: [
         //handlebars
+        //要新增頁面的話必須加入新的 HtmlWebpackPlugin
         new HtmlWebpackPlugin({
-            title: 'Webpack Boilerplate',
-            template: path.join(__dirname, "src", "pages", "index.hbs"),
-            filename: path.join(__dirname, "dist", "index.html"),
+            title: 'Webpack Handlebars Boilerplate',
+            template: path.join(process.cwd(), "src", "pages", "index.hbs"),
+            filename: path.join(process.cwd(), "dist", "index.html"),
             inject: true
         }),
-
+        //MiniCss
         new MiniCssExtractPlugin({
-            filename: "css/[name].css"
-        }),
-        new webpack.HotModuleReplacementPlugin()
+            filename: 'css/style.css'
+        })
     ],
     module: {
         rules: [
@@ -62,8 +48,8 @@ module.exports = {
                     {
                         loader: "handlebars-loader",
                         options: {
-                            helperDirs: path.join(__dirname, 'src', 'helpers'),
-                            partialDirs: path.join(__dirname, 'src', 'partials')
+                            helperDirs: path.join(process.cwd(), 'src', 'helpers'),
+                            partialDirs: path.join(process.cwd(), 'src', 'partials')
                         }
                     }
                 ],
@@ -98,7 +84,6 @@ module.exports = {
             {
                 test: /\.(scss|css)$/,
                 use: [
-                    // 'style-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
@@ -106,15 +91,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    devServer: {
-        static: {
-            directory: path.resolve(__dirname, 'dist/pages'),
-            watch: true
-        },
-        compress: true,
-        // open: true,
-        hot: false,
-        port: 8989
     }
 }
