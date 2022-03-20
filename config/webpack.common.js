@@ -1,7 +1,9 @@
 const path = require('path')
 
+//factory
+const { HtmlPageList } = require('../src/javascript/htmlFactory.js')
+
 //plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
@@ -21,14 +23,12 @@ module.exports = {
         }
     },
     plugins: [
+        /**
+         * 要新增頁面的話直接加在pages就可以
+         * 頁面的 title, meta設定檔存在 htmlFactory.js
+         */
         //handlebars
-        //要新增頁面的話必須加入新的 HtmlWebpackPlugin
-        new HtmlWebpackPlugin({
-            title: 'Webpack Handlebars Boilerplate',
-            template: path.join(process.cwd(), "src", "pages", "index.hbs"),
-            filename: path.join(process.cwd(), "dist", "index.html"),
-            inject: true
-        }),
+        ...HtmlPageList,
         //MiniCss
         new MiniCssExtractPlugin({
             filename: 'css/style.css'
