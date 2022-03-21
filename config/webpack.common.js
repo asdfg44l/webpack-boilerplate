@@ -42,6 +42,7 @@ module.exports = {
                 use: ['html-loader']
             },
             //Handlebars
+            //helpers list: https://github.com/helpers/handlebars-helpers#helpers
             {
                 test: /\.(hbs|handlebars)$/i,
                 use: [
