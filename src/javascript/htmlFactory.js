@@ -23,6 +23,7 @@ const HtmlPageList = fs.readdirSync(pagePath).map(item => {
         template: path.join(process.cwd(), "src", "pages", `${fileName}.hbs`),
         filename: path.join(process.cwd(), "dist", `${fileName}.html`),
         favicon: path.resolve(process.cwd(), 'src/favicon.ico'),
+        // meta: '', tag will append after title tag
         inject: true
     })
 })
