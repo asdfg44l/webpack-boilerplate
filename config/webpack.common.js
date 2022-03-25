@@ -79,7 +79,10 @@ module.exports = {
             //Fonts and SVGs
             {
                 test: /\.(woff(2)?|eot|ttf|otf|svg|$)/,
-                type: 'asset/inline'
+                type: 'asset',
+                generator: {
+                    filename: 'assets/fonts/[name][ext]'
+                }
             },
             //SCSS
             {

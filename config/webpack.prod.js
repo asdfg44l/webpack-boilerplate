@@ -6,6 +6,9 @@ const Dotenv = require('dotenv-webpack')
 
 module.exports = merge(common, {
     mode: 'production',
+    performance: {
+        hints: false
+    },
     plugins: [
         new Dotenv({
             path: './env/.production.env'

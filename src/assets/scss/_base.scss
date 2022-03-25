@@ -1,0 +1,13 @@
+//font
+// @font-face {
+//     font-family: 'PingFang';
+//     src: url('../fonts/PingFang\ Medium.ttf');
+// }
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans-Regular.ttf');
+}
+
+body {
+    font-family: 'Noto Sans', 'PingFang';
+}
