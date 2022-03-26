@@ -1,0 +1,12 @@
+//響應式
+@mixin reponsive-up($size) {
+    @media (min-width: $size) {
+        @content
+    }
+};
+
+@mixin responsive-down($size) {
+    @media (max-width: $size) {
+        @content
+    }
+}

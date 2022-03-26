@@ -35,18 +35,31 @@ $displayList: (
     'inline',
     'block',
     'inline-block',
-    'flex',
+    'flex'
 );
 
 @each $var in $displayList {
     .d-#{$var} {
         display: #{$var} !important;
     }
-}
+    @each $name, $value in $breakpoint {
+        .d-#{$name}-#{$var} {
+            @include reponsive-up($value) {
+                display: #{$var} !important;
+            }
+        }
+    }
+};
 
 //flexbox and colspan
 $gutters: 15px;
 $splitTimes: 12;
+
+.container {
+    max-width: 960px;
+    padding-left: $gutters;
+    padding-right: $gutters;
+}
 
 .container-fluid {
     width: 100%;
@@ -62,6 +75,7 @@ $splitTimes: 12;
 $unit: 100% / $splitTimes;
 @for $i from 1 through $splitTimes {
     .col-#{$i} {
+        width: #{$unit * $i};
         flex: 1 1 #{$unit * $i};
     }
 }
