@@ -23,7 +23,7 @@ export function _i18nSetter(locale) {
 }
 
 //Init user language
-export function initLanguage() {
+export function initI18n() {
     //get user language
     const User_Language = localStorage.getItem('royalq_language') || navigator.language
     _i18nSetter(User_Language.toLowerCase())
