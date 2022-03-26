@@ -30,7 +30,7 @@ export function initI18n() {
 
     //init i18n text
     const initI18nText = () => {
-        const translateList = document.querySelectorAll('.i18n')
+        const translateList = document.querySelectorAll('[data-i18n]')
         translateList.forEach(item => {
             item.textContent = i18n._(item.dataset.i18n.trim())
         })
