@@ -5,24 +5,27 @@
     <title>{{htmlWebpackPlugin.options.title}}</title>
 </head>
 <body>
-    <div id="root" class="container-fluid">
-        <div id="test">
-            {{> test}}
-        </div>
-        <div id="info">
-            <h3 class="display-3 text-center" data-i18n="Hello">
-                Hello
-            </h3>
-            <p class="d-md-inline text-center my-2">
-                display Text
-            </p>
-        </div>
-        <div class="text-center">
-            <select name="lang" id="lang">
-                <option value="zh-tw">繁體中文</option>
-                <option value="en-us">English</option>
-                <option value="id-id">bahasa Indonesia</option>
-            </select>
+    <div id="root" class="position-relative vh-min-100">
+        <div class="loading-container"></div>
+        <div class="container-fluid">
+            <div id="test">
+                {{> test}}
+            </div>
+            <div id="info">
+                <h3 class="display-3 text-center" data-i18n="Hello">
+                    Hello
+                </h3>
+                <p class="d-md-inline text-center my-2">
+                    display Text
+                </p>
+            </div>
+            <div class="text-center">
+                <select name="lang" id="lang">
+                    <option value="zh-tw">繁體中文</option>
+                    <option value="en-us">English</option>
+                    <option value="id-id">bahasa Indonesia</option>
+                </select>
+            </div>
         </div>
     </div>
 </body>
