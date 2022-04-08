@@ -50,7 +50,9 @@ module.exports = {
                         loader: "handlebars-loader",
                         options: {
                             helperDirs: path.join(process.cwd(), 'src', 'helpers'),
-                            partialDirs: path.join(process.cwd(), 'src', 'partials')
+                            partialDirs: path.join(process.cwd(), 'src', 'partials'),
+                            // This option tells to to require the assest 👇
+                            inlineRequires: '\/assets\/',
                         }
                     }
                 ],
@@ -63,7 +65,7 @@ module.exports = {
             },
             //Images
             {
-                test: /\.(?:ico|gif|png|jpe?g)$/i,
+                test: /\.(?:ico|gif|png|jpe?g|svg)$/i,
                 type: 'asset',
                 //解析
                 parser: {
@@ -78,7 +80,7 @@ module.exports = {
             },
             //Fonts and SVGs
             {
-                test: /\.(woff(2)?|eot|ttf|otf|svg|$)/,
+                test: /\.(woff(2)?|eot|ttf|otf|$)/,
                 type: 'asset',
                 generator: {
                     filename: 'assets/fonts/[name][ext]'
