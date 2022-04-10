@@ -19,10 +19,10 @@ const HtmlPageList = fs.readdirSync(pagePath).map(item => {
     const fileName = item.match(/(?<fileName>\w*)\./i).groups.fileName
 
     return new HtmlWebpackPlugin({
-        title: configs[fileName].title || '',
+        title: configs[fileName]?.title || '',
         template: path.join(process.cwd(), "src", "pages", `${fileName}.hbs`),
-        filename: path.join(process.cwd(), "dist", `${fileName}.html`),
-        favicon: path.resolve(process.cwd(), 'src/favicon.ico'),
+        filename: path.join(process.cwd(), "dist", `${fileName}.html`),       
+        favicon: path.resolve(process.cwd(), 'src/favicon.ico'), // icon 路徑
         // meta: '', tag will append after title tag
         inject: true
     })

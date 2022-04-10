@@ -5,11 +5,13 @@ const { HtmlPageList } = require('../src/javascript/htmlFactory.js')
 
 //plugins
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const InlineSourceWebpackPlugin = require('inline-source-webpack-plugin')
 
 module.exports = {
-    entry: [
-        path.join(process.cwd(), 'src/entry.js')
-    ],
+    entry: {
+        main:  path.join(process.cwd(), 'src/entry.js'),
+        // test:  path.join(process.cwd(), 'src/test.js')
+    },
     output: {
         path: path.join(process.cwd(), 'dist'),
         filename: 'javascript/[name].js',
@@ -27,8 +29,16 @@ module.exports = {
          * 要新增頁面的話直接加在pages就可以
          * 頁面的 title, meta設定檔存在 htmlFactory.js
          */
-        //handlebars
+        //Handlebars
         ...HtmlPageList,
+
+        //Inject inline source
+        new InlineSourceWebpackPlugin({
+            compress: true,
+            rootpath: './src',
+            noAssetMatch: 'warn'
+        }),
+
         //MiniCss
         new MiniCssExtractPlugin({
             filename: 'css/style.css'
@@ -52,7 +62,7 @@ module.exports = {
                             helperDirs: path.join(process.cwd(), 'src', 'helpers'),
                             partialDirs: path.join(process.cwd(), 'src', 'partials'),
                             // This option tells to to require the assest 👇
-                            inlineRequires: '\/assets\/',
+                            inlineRequires: '\/assets\ | \/src\/',
                         }
                     }
                 ],
