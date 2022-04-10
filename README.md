@@ -1,5 +1,5 @@
 # Frontend Webpack Boilerplate
-Provide Simple Webpack5 boilerplate using Babel, PostCSS, Sass
+Provide Simple Webpack5 boilerplate using Babel, PostCSS, Sass, LinguiJS
 
 ## 環境建置與需求 (prerequisites)
 #### 環境
@@ -10,6 +10,7 @@ Provide Simple Webpack5 boilerplate using Babel, PostCSS, Sass
 - [Babel](https://babeljs.io/)
 - [Sass](https://sass-lang.com/)
 - [PostCSS](https://postcss.org/)
+- [LinguiJS](https://lingui.js.org/)
 
 ## 安裝與執行 (installation and execution)
 1. 使用 git 下載本專案 (Git Clone)
