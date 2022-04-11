@@ -62,7 +62,7 @@ module.exports = {
                             helperDirs: path.join(process.cwd(), 'src', 'helpers'),
                             partialDirs: path.join(process.cwd(), 'src', 'partials'),
                             // This option tells to to require the assest 👇
-                            inlineRequires: '\/assets\ | \/src\/',
+                            inlineRequires: '\/assets\/',
                         }
                     }
                 ],
