@@ -31,6 +31,7 @@ let configs = {
 1. 在 locales新增 json檔
 2. 新增該語系的 plurals
 ```
+i18nLoader.js
 //import plural rules
 import { en, zh } from "make-plural/plurals"
 
