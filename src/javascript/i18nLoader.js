@@ -23,7 +23,8 @@ export function _i18nSetter(locale) {
 }
 
 //Init user language
-export function initI18n() {
+//targetID: string (DOM id)
+export function initI18n(targetID) {
     //get user language
     const User_Language = localStorage.getItem('royalq_language') || navigator.language
     _i18nSetter(User_Language.toLowerCase())
@@ -38,7 +39,7 @@ export function initI18n() {
     initI18nText()
 
     //init select value
-    const langSwitch = document.getElementById('lang')
+    const langSwitch = document.getElementById(targetID)
     langSwitch.value = User_Language
     
     //listen select change
