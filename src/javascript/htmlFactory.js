@@ -10,7 +10,12 @@ const pagePath = path.resolve(process.cwd(), 'src/pages')
 //html title or meta tag (有需要可以拆檔出去)
 let configs = {
     index: {
-        title: 'Webpack Handlebars Boilerplate'
+        title: 'Webpack Handlebars Boilerplate',
+        //appendChunks: []
+    },
+    about: {
+        title: 'this is an about page',
+        appendChunks: ['test']
     }
 }
 
@@ -23,6 +28,9 @@ const HtmlPageList = fs.readdirSync(pagePath).map(item => {
         template: path.join(process.cwd(), "src", "pages", `${fileName}.hbs`),
         filename: path.join(process.cwd(), "dist", `${fileName}.html`),       
         favicon: path.resolve(process.cwd(), 'src/favicon.ico'), // icon 路徑
+        chunks: configs[fileName]?.appendChunks 
+            ? configs[fileName].appendChunks.concat(['main'])
+            : ['main'],
         // meta: '', tag will append after title tag
         inject: true
     })

@@ -5,12 +5,11 @@ const { HtmlPageList } = require('../src/javascript/htmlFactory.js')
 
 //plugins
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const InlineSourceWebpackPlugin = require('inline-source-webpack-plugin')
 
 module.exports = {
     entry: {
         main:  path.join(process.cwd(), 'src/entry.js'),
-        // test:  path.join(process.cwd(), 'src/test.js')
+        test:  path.join(process.cwd(), 'src/test.js')
     },
     output: {
         path: path.join(process.cwd(), 'dist'),
@@ -31,13 +30,6 @@ module.exports = {
          */
         //Handlebars
         ...HtmlPageList,
-
-        //Inject inline source
-        new InlineSourceWebpackPlugin({
-            compress: true,
-            rootpath: './src',
-            noAssetMatch: 'warn'
-        }),
 
         //MiniCss
         new MiniCssExtractPlugin({
