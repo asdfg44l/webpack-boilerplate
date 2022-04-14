@@ -63,7 +63,7 @@ $displayList: (
     }
     @each $name, $value in $breakpoint {
         .d-#{$name}-#{$var} {
-            @include reponsive-up($value) {
+            @include responsive-up($value) {
                 display: #{$var} !important;
             }
         }
