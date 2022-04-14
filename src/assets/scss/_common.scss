@@ -16,3 +16,8 @@
 .position-relative {
     position: relative;
 }
+
+//RFS (Responsive Font Sizes)
+.title {
+    @include font-size(4rem)
+}
