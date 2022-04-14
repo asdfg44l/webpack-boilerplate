@@ -97,6 +97,14 @@ $unit: 100% / $splitTimes;
         width: #{$unit * $i};
         flex: 1 1 #{$unit * $i};
     }
+    @each $name, $value in $breakpoint {
+        .col-#{$name}-#{$i} {
+            @include responsive-up($value) {
+                width: #{$unit * $i};
+                flex: 1 1 #{$unit * $i};
+            }
+        }
+    }
 }
 
 
