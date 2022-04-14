@@ -10,6 +10,7 @@ $position: (
 );
 
 @each $key, $val in ( "p": "padding", "m": "margin" ) {
+    //$spacer
     @for $i from 1 through 6 {
         .#{$key}-#{$i} {
             #{$val}: $i * $spacer !important;
@@ -28,10 +29,28 @@ $position: (
             }
         }
     }
+
+    //auto
+    @if $key == "m" {
+        @each $pos-name, $pos-val in $position {
+            @if $pos-name == 'x' or $pos-name == 'y' {
+                .#{$key}#{$pos-name}-auto {
+                    #{$val}-#{nth($pos-val, 1)}: auto !important;
+                    #{$val}-#{nth($pos-val, 2)}: auto !important;
+                }
+            }
+            @else {
+                .#{$key}#{$pos-val}-auto {
+                    #{$val}-#{$pos-name}: auto
+                }
+            }
+        }
+    }
 }
 
 //display
 $displayList: (
+    'none',
     'inline',
     'block',
     'inline-block',
